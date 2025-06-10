@@ -43,6 +43,9 @@ namespace SkalProj_Datastrukturer_Minne
                     case '4':
                         CheckParanthesis();
                         break;
+                    case '5':
+                        ReverseText();
+                        break;
                     /*
                      * Extend the menu to include the recursive 
                      * and iterative exercises.
@@ -82,7 +85,7 @@ namespace SkalProj_Datastrukturer_Minne
                     + "\n-. Remove following input after '+' to the list"
                 );
 
-                string input = Console.ReadLine()!;
+                string input = Console.ReadLine() ?? string.Empty;
                 char nav = input[0];
                 string restOfString = input.Substring(1);
 
@@ -117,6 +120,33 @@ namespace SkalProj_Datastrukturer_Minne
              * Create a switch with cases to enqueue items or dequeue items
              * Make sure to look at the queue after Enqueueing and Dequeueing to see how it behaves
             */
+
+            Console.WriteLine
+            (
+                "E. Exit to the main menu"
+                + "\nR. Remove from queue"
+                + "\n<anything>. Add to queue"
+            );
+            Queue<string> queue = new();
+            bool running = true;
+            while (running)
+            {
+                string input = Console.ReadLine() ?? string.Empty;
+                switch (input)
+                {
+                    case "E":
+                        running = false;
+                        break;
+                    case "R":
+                        if (queue.Count > 0) 
+                            Console.WriteLine(queue.Dequeue().ToString() + " has been removed from the queue");
+                        break;
+                    default:
+                        queue.Enqueue(input);
+                        Console.WriteLine($"{input} has been added to the queue"); 
+                        break;
+                }
+            }
         }
 
         /// <summary>
@@ -129,6 +159,55 @@ namespace SkalProj_Datastrukturer_Minne
              * Create a switch with cases to push or pop items
              * Make sure to look at the stack after pushing and and poping to see how it behaves
             */
+
+            
+            Stack<string> stack = new();
+
+            bool running = true;
+
+            while (running)
+            {
+                Console.WriteLine();
+                Console.WriteLine
+                (
+                    "E. Exit to the main menu"
+                    + "\nR. Pop from stack"
+                    + "\n<anything>. Add to stack"
+                );
+
+                string input = Console.ReadLine()!;
+
+
+                switch (input)
+                {
+                    case "E":
+                        running = false;
+                        break;
+                    case "R":
+                        if (stack.Count > 0)
+                            Console.WriteLine(stack.Pop().ToString() + " has been removed from the stack");
+                        break;
+                    default:
+                        stack.Push(input);
+                        Console.WriteLine($"{input} has been added to the stack");
+                        break;
+                }
+            }
+        }
+
+        static void ReverseText()
+        {
+            Console.WriteLine("Type some text to reverse");
+
+            string input = Console.ReadLine() ?? string.Empty;
+
+            Stack<char> stack = new();
+
+            foreach (char c in input)
+                stack.Push(c);
+
+            while (stack.Count > 0)
+                Console.Write(stack.Pop());
         }
 
         static void CheckParanthesis()
