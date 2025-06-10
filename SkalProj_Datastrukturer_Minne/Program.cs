@@ -71,13 +71,40 @@ namespace SkalProj_Datastrukturer_Minne
              * As a default case, tell them to use only + or -
              * Below you can see some inspirational code to begin working.
             */
+            List<string> theList = new();
+            bool running = true;
+            while (running)
+            {
+                Console.WriteLine
+                (
+                      "E. Exit to the main menu"
+                    + "\n+. Add following input after '+' to the list"
+                    + "\n-. Remove following input after '+' to the list"
+                );
 
-            //List<string> theList = new List<string>();
-            //string input = Console.ReadLine();
-            //char nav = input[0];
-            //string value = input.substring(1);
+                string input = Console.ReadLine()!;
+                char nav = input[0];
+                string restOfString = input.Substring(1);
 
-            //switch(nav){...}
+
+                switch (nav) 
+                {
+                    case 'E':
+                        running = false;
+                        break;
+                    case '+':
+                        theList.Add(restOfString);
+                        Console.WriteLine($"Count: {theList.Count} Capacity: {theList.Capacity}");
+                        break;
+                    case '-':
+                        theList.Remove(restOfString);
+                        Console.WriteLine($"Count: {theList.Count} Capacity: {theList.Capacity}");
+                        break;
+                    default:
+                        Console.WriteLine("Type either + or - first");
+                        break;
+                }
+            }
         }
 
         /// <summary>
