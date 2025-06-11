@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Text.RegularExpressions;
 
 namespace SkalProj_Datastrukturer_Minne
@@ -19,6 +20,9 @@ namespace SkalProj_Datastrukturer_Minne
                     + "\n2. Examine a Queue"
                     + "\n3. Examine a Stack"
                     + "\n4. CheckParenthesis"
+                    + "\n5. ReverseText"
+                    + "\n6. RecursionMenu"
+                    + "\n7. IterationMenu"
                     + "\n0. Exit the application");
                 char input = ' '; //Creates the character input to be used with the switch-case below.
                 try
@@ -47,6 +51,12 @@ namespace SkalProj_Datastrukturer_Minne
                     case '5':
                         ReverseText();
                         break;
+                    case '6':
+                        RecursionMenu();
+                        break;
+                    case '7':
+                        IterationMenu();
+                        break;
                     /*
                      * Extend the menu to include the recursive 
                      * and iterative exercises.
@@ -60,6 +70,7 @@ namespace SkalProj_Datastrukturer_Minne
                 }
             }
         }
+
 
         /// <summary>
         /// Examines the datastructure List
@@ -140,7 +151,7 @@ namespace SkalProj_Datastrukturer_Minne
                         break;
                     case "R":
                         if (queue.Count > 0) 
-                            Console.WriteLine(queue.Dequeue().ToString() + " has been removed from the queue");
+                            Console.WriteLine(queue.Dequeue() + " has been removed from the queue");
                         break;
                     default:
                         queue.Enqueue(input);
@@ -186,7 +197,7 @@ namespace SkalProj_Datastrukturer_Minne
                         break;
                     case "R":
                         if (stack.Count > 0)
-                            Console.WriteLine(stack.Pop().ToString() + " has been removed from the stack");
+                            Console.WriteLine(stack.Pop() + " has been removed from the stack");
                         break;
                     default:
                         stack.Push(input);
@@ -204,8 +215,8 @@ namespace SkalProj_Datastrukturer_Minne
 
             Stack<char> stack = new();
 
-            foreach (char c in input)
-                stack.Push(c);
+            foreach (char character in input)
+                stack.Push(character);
 
             while (stack.Count > 0)
                 Console.Write(stack.Pop());
@@ -218,6 +229,10 @@ namespace SkalProj_Datastrukturer_Minne
              * Example of correct: (()), {}, [({})],  List<int> list = new List<int>() { 1, 2, 3, 4 };
              * Example of incorrect: (()]), [), {[()}],  List<int> list = new List<int>() { 1, 2, 3, 4 );
              */
+
+            Console.WriteLine("Write a well shaped string meaning brackets are opened and closed in right order"
+                + "\n[](){}[()]");
+
 
             string input = Console.ReadLine() ?? string.Empty;
             string onlyBrackets = Regex.Replace(input, @"[^\[\]{}()]", "");
@@ -262,6 +277,125 @@ namespace SkalProj_Datastrukturer_Minne
                 Console.WriteLine("String is not well shaped");
             }
 
+        }
+
+        static int RecursiveEven(int n)
+        {
+            if (n == 0)
+            {
+                return 0;
+            }
+            return RecursiveEven(n - 1) + 2;
+        }
+        static int RecursiveFibonacci(int n)
+        {
+            if (n == 0)
+                return 0;
+
+            if (n == 1)
+                return 1;
+
+            return (RecursiveFibonacci(n - 1) + RecursiveFibonacci(n - 2));
+        }
+        private static void RecursionMenu()
+        {
+            bool running = true;
+
+            while (running)
+            {
+                Console.WriteLine();
+                Console.WriteLine
+                (
+                    "E. Exit to the main menu"
+                    + "\nR. RecursiveEven ex 5"
+                    + "\nF. RecursiveFibonacci ex 10"
+                );
+
+                string input = Console.ReadLine()!;
+
+
+                switch (input)
+                {
+                    case "E":
+                        running = false;
+                        break;
+                    case "R":
+                        Console.WriteLine(RecursiveEven(5));
+                        break;
+                    case "F":
+                        Console.WriteLine(RecursiveFibonacci(10));
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+        static int IterativeEven(int n)
+        {
+            int result = 0;
+
+            for(int i = 0; i < n; i++)
+            {
+                result += 2;
+            }
+            return result;
+        }
+        static int IterativeFibonacci(int n)
+        {
+            if (n == 0)
+                return 0;
+            if (n == 1)
+                return 1;
+
+            int result = 0;
+
+            int fib1 = 0;
+            int fib2 = 1;
+            
+            for (int i = 2; i <= n; i++)
+            {
+                int newFib = fib1 + fib2;
+                fib1 = fib2;
+                fib2 = newFib;
+            }
+
+            return result;
+        }
+
+
+
+        private static void IterationMenu()
+        {
+            bool running = true;
+
+            while (running)
+            {
+                Console.WriteLine();
+                Console.WriteLine
+                (
+                    "E. Exit to the main menu"
+                    + "\nR. IterativeEven ex 5"
+                    + "\nF. IterativeFibonacci ex 10"
+                );
+
+                string input = Console.ReadLine()!;
+
+
+                switch (input)
+                {
+                    case "E":
+                        running = false;
+                        break;
+                    case "R":
+                        Console.WriteLine(IterativeEven(5));
+                        break;
+                    case "F":
+                        Console.WriteLine(IterativeFibonacci(10));
+                        break;
+                    default:
+                        break;
+                }
+            }
         }
 
     }
