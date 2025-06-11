@@ -220,6 +220,8 @@ namespace SkalProj_Datastrukturer_Minne
 
             while (stack.Count > 0)
                 Console.Write(stack.Pop());
+
+            Console.WriteLine();
         }
 
         static void CheckParanthesis()
@@ -358,6 +360,8 @@ namespace SkalProj_Datastrukturer_Minne
                 fib1 = fib2;
                 fib2 = newFib;
             }
+
+            result = fib2;
 
             return result;
         }
