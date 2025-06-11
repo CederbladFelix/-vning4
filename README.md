@@ -17,6 +17,7 @@ Jag tror att det är för att då hade man behövt göra en ny underliggande arr
 Inte vad jag ser. NEJ
 
 •	När är det fördelaktigt att använda en egendefinierad array istället för en lista?
+
 När man vet ungefär hur många element man ska ha. Jag kan tänka mig att man kan göra en egen listimplementation som inte dubblar arraysizen också om man förväntar sig ett tak på elementen över sikt. Det blir ytterst problematisk om man har stora datamängder och så bestämmer sig listan för att dubbla. Då kan en egenimplementation vara smartare.
 
 Övning 3
