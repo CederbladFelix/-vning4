@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.RegularExpressions;
 
 namespace SkalProj_Datastrukturer_Minne
 {
@@ -217,6 +218,49 @@ namespace SkalProj_Datastrukturer_Minne
              * Example of correct: (()), {}, [({})],  List<int> list = new List<int>() { 1, 2, 3, 4 };
              * Example of incorrect: (()]), [), {[()}],  List<int> list = new List<int>() { 1, 2, 3, 4 );
              */
+
+            string input = Console.ReadLine() ?? string.Empty;
+            string onlyBrackets = Regex.Replace(input, @"[^\[\]{}()]", "");
+
+            Dictionary<char, char> bracketPairs = new();
+
+            bracketPairs.Add('(', ')');
+            bracketPairs.Add('[', ']');
+            bracketPairs.Add('{', '}');
+
+            Stack<char> openingBrackets = new();
+            bool wellShaped = true;
+
+            foreach (char bracket in onlyBrackets)
+            {
+                if (bracketPairs.ContainsKey(bracket)) // Is an opening bracket
+                {
+                    openingBrackets.Push(bracket);
+                }
+                else if (openingBrackets.Count > 0 && bracketPairs[openingBrackets.Peek()] == bracket) //Is a matching closing bracket
+                {
+                    openingBrackets.Pop();
+                }
+                else
+                {
+                    wellShaped = false;
+                    break;
+                }
+            }
+
+            if (openingBrackets.Count != 0) // Don't want to leave any opening bracket left unchecked
+            {
+                wellShaped = false;
+            }
+
+            if (wellShaped)
+            {
+                Console.WriteLine("String is well shaped");
+            }
+            else
+            {
+                Console.WriteLine("String is not well shaped");
+            }
 
         }
 
